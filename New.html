@@ -1,0 +1,40 @@
+<html>
+    <body>
+<input type="text" id="search" placeholder="EnterSearch Text" /><br/>  
+<div id="txtdesc" rows="40" cols="40" style="border:1px solid black">  
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,   
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic   
+        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with   
+        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.  
+</div>  
+<br/>  
+<button id="btn">Search</button>  
+<!--jQuery-->
+<script src="/js/jquery.js" type="text/javascript">  
+   
+    $('#btn').bind('click', function (e) {    
+              e.preventDefault();    
+              var searchTxtBox = $('#search');    
+              searchTxtBox.val(searchTxtBox.val().replace(/(\s+)/,"(<[^>]+>)*$1(<[^>]+>)*"));    
+              var textarea = $('#txtdesc');    
+              var enew = '';    
+              if (searchTxtBox.val() != '') {    
+      
+                  enew = textarea.html().replace(/(<mark>|<\/mark>)/igm, "");    
+                  textarea.html(enew);     
+                      
+                  var query = new RegExp("("+searchTxtBox.val()+")", "gim");    
+                  newtext= textarea.html().replace(query, "<mark>$1</mark>");    
+                  newtext= newtext.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/,"</mark><mark>");    
+      
+                  textarea.html(newtext);     
+    
+              }    
+              else {    
+                  enew = textarea.html().replace(/(<mark>|<\/mark>)/igm, "");    
+                  textarea.html(enew);     
+              }    
+          });     
+  </script>  
+  </body>
+  </html>  
